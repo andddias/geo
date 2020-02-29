@@ -9,7 +9,7 @@
     var lat = {{ items.businesses.0.coordinates.latitude | safe }};
     var lon = {{ items.businesses.0.coordinates.longitude | safe }};
 
-    var map = L.map('mapDiv').setView([lat, lon], 13); //0 até 18
+    var map = L.map('mapDiv').setView([lat, lon], 13);  //0 até 18
 
     L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors',
