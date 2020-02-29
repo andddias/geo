@@ -17,7 +17,7 @@
     }).addTo(map);
 
     {% for busines in items.businesses %}
-        var marker = L.marker([{{ busines.coordinates.latitude | safe }}, {{ busines.coordinates.longitude | safe }}]).addTo(map);
+        var marker = L.marker([{{ busines.coordinates.latitude | safe }}, {{ busines.coordinates.longitude | safe }}]}.addTo(map);
 
         marker.bindPopup("<b>{{ busines.name }}</b><br/>{{ busines.location.display_address.0 }} {{ busines.location.display_address.1 }}<br/>{{ city }}").openPopup();
     {% endfor %}
