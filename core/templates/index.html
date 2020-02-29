@@ -1,5 +1,4 @@
 {% extends 'base.html' %}
-
 {% block content %}
     <div class="row">
         <div class="col-sm-6">
@@ -7,30 +6,29 @@
                 <!--Removido o token pois não é necessario neste caso-->
                 <div class="form-group">
                     <h1><a href="{% url 'index' %}">Buscador Geek</a> </h1>
-                    <h4>[{{ city }} {% if country %} - {{ country }} {% endif %}]</h4>
                 </div>
                 <div class="form-group">
                     <input class="form-control" type="text" name="key" placeholder="Digite um termo para busca (obrigatório)" required/>
                     <small id="keyHelp" class="form-text text-muted">Exemplo: Mexican Food, Brazilian Food, Asian Food</small>
                 </div>
                  <div class="form-group">
-                    <input class="form-control" type="text" name="loc" placeholder="Digite uma cidade para efetuar a busca"/>
+                    <input class="form-control" type="text" name="loc" placeholder="Digite uma cidade ou deixe em branco p/ busca aleatória pelo mundo"/>
                     <small id="keyLoc" class="form-text text-muted">Exemplo: Vancouver, Madrid, Mexico City</small>
                 </div>
                 <button type="submit" class="btn btn-primary">Buscar</button>
             </form>
             {% if 'error' in items %}
-                <h1>Nenhum estabelicemnto encontrado em {{ city }}</h1>
+                <h1>Nenhum estabelecimento encontrado em [{{ city }}]</h1>
             {% elif busca and items.businesses|length < 1 %}
-                <h1>Nada encontrado sobre o termo buscado</h1>
-            {% elif city and items %}
-                <h1>Resultado da Busca</h1>
+                <h1>Nenhum estabelecimento encontrado sobre o termo buscado</h1>
+            {% elif city and items.businesses|length > 0 %}
+                <h1>{{ items.businesses|length }} Resultado(s) em [{{ city }}]</h1>
                 {% for busines in items.businesses %}
-                    <span class="text-info">{{ busines.name }}, {{ city }}</span><br/>
+                    <span class="text-info">{{ busines.name }}</span><br/>
                 {% endfor %}
             {% endif %}
         </div>
-    {% if city and items|length > 1 %}
+    {% if city and items.businesses|length > 0 %}
         {% include 'maps.html' %}
     {% else %}
     </div> <!--Fechamento da div em caso de else, não carregamento do mapa-->
